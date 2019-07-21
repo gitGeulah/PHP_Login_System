@@ -42,10 +42,8 @@
                     </div>
 
                     <div class="uk-margin">
-                        <div class="button uk-button uk-button-default" type="submit">
-                            Login
-                        </div>
-                    </div>
+			            <button class="uk-button uk-button-default" type="submit">Login</button>
+			        </div>
 
                 </form>
             </div>
