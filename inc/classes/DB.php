@@ -1,36 +1,37 @@
 <?php
 
-    //If there is no constant called __CONFIG__, do not load this file
-    if(!defined('__CONFIG__')) {
-        exit('You do not have a config file');
-    }
+// If there is no constant defined called __CONFIG__, do not load this file 
+if(!defined('__CONFIG__')) {
+	exit('You do not have a config file');
+}
 
-    class DB {
+class DB {
 
-        protected static $con;
+	protected static $con;
 
-        private function __construct() {
-            
-            try {
-                self::$con = new PDO( 'mysql:charset=utf8mb4;host=localhost;port=3306;dbname=login_course', 'Shmuel', 'Kli770NOW!');
-                self::$con->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-                self::$con->setAttribute( PDO::ATTR_PERSISTENT, false );
+	private function __construct() {
 
-            } catch (PDOException $e) {
-                echo "Could not conncet to database."; exit;
-            }
-            
-        }
+		try {
 
-        public static function getConnection() {
-            //If this instance has not been started, start it
-            if(!self::$con) {
-                new DB();
-            }
+			self::$con = new PDO( 'mysql:charset=utf8mb4;host=localhost;port=3306;dbname=login_course', 'Shmuel', 'Kli770NOW!' );
+			self::$con->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+			self::$con->setAttribute( PDO::ATTR_PERSISTENT, false );
 
-            //Return the writable db connection
-            return self::$con;
-        }
+		} catch (PDOException $e) {
+			echo "Could not connect to database."; exit;
+		}
 
-    }
+	}
+
+
+	public static function getConnection() {
+
+		if (!self::$con) {
+			new DB();
+		}
+
+		return self::$con;
+	}
+}
+
 ?>
