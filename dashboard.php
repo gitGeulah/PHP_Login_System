@@ -5,10 +5,10 @@
 	// Require the config
 	require_once "inc/config.php"; 
 
-	echo $_SESSION['user_id'] . ' is your user id';
-	exit;
+	ForceLogin();
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,14 +26,7 @@
   <body>
 
   	<div class="uk-section uk-container">
-  		<?php 
-  			echo "Hello world. Today is: ";
-  			echo date("Y m d");
-  		?> 
-  		<p>
-  			<a href="/login.php">Login</a>
-  			<a href="/register.php">Register</a>
-  		</p>
+		Dashboard here; you are signed in as user: <?php echo $_SESSION['user_id']; ?>
   	</div>
 
   	<?php require_once "inc/footer.php"; ?> 
