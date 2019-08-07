@@ -26,7 +26,10 @@
   <body>
 
   	<div class="uk-section uk-container">
-		Dashboard here; you are signed in as user: <?php echo $_SESSION['user_id']; ?>
+  		Dashboard here; you are signed in as user: <?php echo $_SESSION['user_id']; ?>
+      <div class="uk-margin">
+			        <button class="uk-button uk-button-default" onclick="window.location.href='php_login_course/logout.php';" style="margin-top:5%;">Logout</button>
+      </div>
   	</div>
 
   	<?php require_once "inc/footer.php"; ?> 

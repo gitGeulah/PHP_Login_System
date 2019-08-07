@@ -6,7 +6,7 @@
 	// Require the config
 	require_once "../inc/config.php"; 
 
-	if($_SERVER['REQUEST_METHOD']) {
+	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// Always return JSON format
 		// header('Content-Type: application/json');
 
@@ -21,21 +21,26 @@
 		$findUser->execute();
 
 		if($findUser->rowCount() == 1) {
-			// User exists. Try and sign them in
+			// User exists, try and sign them in
 			$User = $findUser->fetch(PDO::FETCH_ASSOC);
 
 			$user_id = (int) $User['user_id'];
 			$hash = (string) $User['password'];
 
 			if(password_verify($password, $hash)) {
-				//User is signed in
+				// User is signed in
 				$return['redirect'] = 'php_login_course/dashboard.php';
-
-				$SESSION['user_id'] = $user_id;
+				$return['is_logged_in'] = true;
+				$_SESSION['user_id'] = $user_id;
+			} else {
+				// Invalid user email/password combo
+				$return['error'] = "Invalid user email/password combo";
 			}
+
+			$return['error'] = "You already have an account";
 		} else {
-			// Invalid user email/password combo
-			$return['error'] = "Invalid user email/password combo";
+			// They need to create a new account
+			$return['error'] = "You do not have an account. <a href='/register.php'>Create one now?</a>";
 		}
 
 		echo json_encode($return, JSON_PRETTY_PRINT); exit;

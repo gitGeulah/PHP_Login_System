@@ -6,7 +6,7 @@
 	// Require the config
 	require_once "../inc/config.php"; 
 
-	if($_SERVER['REQUEST_METHOD']) {
+	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// Always return JSON format
 		// header('Content-Type: application/json');
 
@@ -36,10 +36,8 @@
 
 			$user_id = $con->lastInsertId();
 
-			$_SESSION['user_id'] = (int) $user_id;
-
-			//$return['redirect'] = '/dashboard.php?message=welcome';
-			$return['is_logged_in'] = true;
+			//$_SESSION['user_id'] = (int) $user_id;
+			$return['redirect'] = 'php_login_course/index.php';
 		}
 
 		echo json_encode($return, JSON_PRETTY_PRINT); exit;
