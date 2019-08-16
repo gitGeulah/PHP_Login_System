@@ -5,7 +5,9 @@
 	// Require the config
 	require_once "inc/config.php"; 
 
-	ForceLogin();
+  Page::ForceLogin();
+  
+  $User = new User($_SESSION['user_id']);
 
 ?>
 
@@ -26,7 +28,8 @@
   <body>
 
   	<div class="uk-section uk-container">
-  		Dashboard here; you are signed in as user: <?php echo $_SESSION['user_id']; ?>
+    <h2>Welcome: <?php echo $User->email; ?> </h2>
+    <p>Dashboard here; you are signed in as user: <?php echo $User->user_id; ?></p>
       <div class="uk-margin">
 			        <button class="uk-button uk-button-default" onclick="window.location.href='php_login_course/logout.php';" style="margin-top:5%;">Logout</button>
       </div>
